@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/* Стиль в духе приложений Apple (Фитнес, Здоровье): сгруппированный серый фон, белые карточки
+   без рамок, системный шрифт, крупные заголовки, мягкие радиусы, один фирменный синий.
+   На устройствах Apple используется SF Pro, на остальных — Inter (ближайший аналог). */
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter Variable", Inter,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-paper: #f2f2f7; /* systemGroupedBackground */
+  --color-surface: #ffffff;
+  --color-fill: #f2f2f7; /* заливка полей и нейтральных плашек на белом */
+  --color-fill-2: #e9e9ee;
+  --color-line: #e5e5ea; /* separator */
+  --color-line-strong: #d1d1d6;
+  --color-ink: #1d1d1f; /* label */
+  --color-ink-2: #3a3a3c;
+  --color-muted: #6e6e73; /* secondaryLabel, 5.0:1 на белом */
+  --color-faint: #8e8e93; /* только иконки и необязательный текст */
+
+  --color-brand: #1565c0;
+  --color-brand-dark: #0f4f9a;
+  --color-brand-soft: #e8f0fb;
+  --color-accent: #1565c0;
+  --color-accent-strong: #0f4f9a;
+  --color-accent-soft: #e8f0fb;
+  --color-sky: #32ade6;
+
+  --color-viewer: #1c1c1e;
+
+  /* Статусы: текст — тёмные оттенки (контраст ≥ 4.5:1), заливки колец и точек — яркие */
+  --color-ok: #1b7a3e;
+  --color-ok-fill: #28a745;
+  --color-ok-soft: #e6f4ea;
+  --color-bad: #c62828;
+  --color-bad-fill: #e5484d;
+  --color-bad-soft: #fdecec;
+  --color-warn: #a35c00;
+  --color-warn-fill: #f5a623;
+  --color-warn-soft: #fff3e0;
+
+  --radius-card: 18px;
+  --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper text-ink font-sans text-[15px];
+    font-feature-settings: "cv11" 1, "ss01" 1; /* у Inter: более «эппловские» формы цифр и букв */
+  }
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--color-brand) 45%, transparent);
+    outline-offset: 2px;
+    border-radius: 10px;
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@utility card {
+  @apply bg-surface rounded-[var(--radius-card)];
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full text-[15px] font-semibold
+    select-none whitespace-nowrap cursor-pointer
+    disabled:opacity-40 disabled:pointer-events-none;
+  transition:
+    background-color 150ms var(--ease-apple),
+    transform 120ms var(--ease-apple);
+  &:active {
+    transform: scale(0.97);
+  }
+}
+@utility btn-primary {
+  @apply btn bg-brand text-white hover:bg-brand-dark;
+}
+/* «tinted» кнопка Apple: заливка фирменным цветом 10%, текст фирменный */
+@utility btn-secondary {
+  @apply btn bg-brand-soft text-brand hover:bg-[#dbe7f8];
+}
+@utility btn-ghost {
+  @apply btn text-brand hover:bg-brand-soft;
+}
+@utility btn-plain {
+  @apply btn bg-fill text-ink hover:bg-fill-2;
+}
+@utility input {
+  @apply w-full h-11 px-4 rounded-xl bg-fill text-[15px] text-ink border border-transparent
+    placeholder:text-faint focus:bg-surface focus:border-brand focus:outline-none;
+  transition:
+    background-color 150ms var(--ease-apple),
+    border-color 150ms var(--ease-apple);
+}
+@utility label {
+  @apply block text-[13px] font-medium text-muted mb-1.5 px-1;
+}
+/* Заголовок группы над карточкой, как в «Настройках» и «Здоровье» */
+@utility section-title {
+  @apply text-[20px] font-bold text-ink mb-3 px-1;
+  letter-spacing: -0.02em;
+}
+@utility th {
+  @apply text-left text-[13px] font-medium text-muted px-5 py-3 border-b border-line whitespace-nowrap;
+}
+@utility td {
+  @apply px-5 py-3.5 border-b border-line text-[15px] align-middle;
+}
+
+.skeleton {
+  background: #e5e5ea;
+  border-radius: 12px;
+}
+
+/* Движение: одно спокойное появление страницы и отрисовка колец. Всё отключается
+   системной настройкой «Уменьшить движение». */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.page-in {
+  animation: page-in 280ms var(--ease-apple) both;
+}
+.sheet-in {
+  animation: sheet-in 320ms var(--ease-apple) both;
+}
+.fade-in {
+  animation: fade-in 200ms var(--ease-apple) both;
+}
+.ring-arc {
+  transition: stroke-dashoffset 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

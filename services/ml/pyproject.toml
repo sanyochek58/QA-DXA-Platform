@@ -1,0 +1,32 @@
+[project]
+name = "dxa-ml"
+version = "1.0.0"
+description = "DXA-QA Platform: ML-сервис оценки качества денситометрии (без БД и пользователей)"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.115",
+    "pydicom>=3.0",
+    "numpy>=1.26",
+    "pillow>=10.4",
+    "pyyaml>=6.0",
+    "scikit-image>=0.24",
+    "scikit-learn>=1.5",
+    "pandas>=2.2",
+    "joblib>=1.4",
+    "openpyxl>=3.1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.3", "ruff>=0.8"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E741"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

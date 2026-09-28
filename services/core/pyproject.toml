@@ -1,0 +1,38 @@
+[project]
+name = "dxa-core"
+version = "0.1.0"
+description = "DXA-QA Platform: основное приложение (пользователи, исследования, статистика)"
+authors = [
+    { name = "sanyochek58", email = "sanya.burayev.03@mail.ru" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "alembic>=1.14",
+    "asyncpg>=0.30",
+    "fastapi[standard]>=0.115",
+    "pwdlib[argon2]>=0.2.1",
+    "pydantic-settings>=2.6",
+    "pyjwt>=2.10",
+    "sqlalchemy[asyncio]>=2.0.36",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.8",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"

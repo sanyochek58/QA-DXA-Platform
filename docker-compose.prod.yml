@@ -1,0 +1,76 @@
+
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 3s
+      retries: 20
+
+  ml:
+    build: ./services/ml
+    restart: unless-stopped
+    environment:
+      DATA_DIR: /data
+    volumes:
+      - studies:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
+      interval: 5s
+      retries: 30
+
+  core:
+    build: ./services/core
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      ML_SERVICE_URL: http://ml:8001
+      DATA_DIR: /data
+      # адрес возврата из ЕСИА проверяется по этому списку — домен обязателен
+      CORS_ORIGINS: '["https://${DOMAIN}"]'
+      DEMO_SRC: /demo/Исследования
+    volumes:
+      - studies:/data
+      - ./data/train:/demo:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      ml:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-3000}:80" # только localhost: снаружи — через Caddy/nginx
+    depends_on:
+      - core
+
+  caddy:
+    image: caddy:2-alpine
+    profiles: ["caddy"] # включается флагом --profile caddy (вариант А)
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data # сертификаты: не теряются при пересоздании контейнера
+    depends_on:
+      - frontend
+
+volumes:
+  db_data:
+  studies:
+  caddy_data:

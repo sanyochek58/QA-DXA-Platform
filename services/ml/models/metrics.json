@@ -1,0 +1,366 @@
+{
+  "trained_at": "2026-09-28T14:14:31.819832+00:00",
+  "n_images": 499,
+  "n_studies": 100,
+  "region_test": {
+    "CR000000_ПОП.dcm": {
+      "expected": "spine",
+      "predicted": "spine"
+    },
+    "CR000000_ППОБ.dcm": {
+      "expected": "right_hip",
+      "predicted": "right_hip"
+    },
+    "CR000001_ЛПОБ.dcm": {
+      "expected": "left_hip",
+      "predicted": "left_hip"
+    }
+  },
+  "targets": {
+    "spine_positioning": {
+      "roc_auc": 0.846,
+      "pr_auc": 0.473,
+      "f1": 0.571,
+      "precision": 0.5,
+      "recall": 0.667,
+      "balanced_accuracy": 0.812,
+      "positives": 6,
+      "n": 99,
+      "threshold": 0.586,
+      "specificity": 0.957,
+      "ci95": {
+        "roc_auc": [
+          0.598,
+          0.99
+        ],
+        "f1": [
+          0.2,
+          0.857
+        ],
+        "recall": [
+          0.246,
+          1.0
+        ],
+        "specificity": [
+          0.914,
+          0.989
+        ],
+        "balanced_accuracy": [
+          0.589,
+          0.989
+        ]
+      },
+      "model": "logreg_geom",
+      "candidates_auc": {
+        "logreg_key": 0.812,
+        "rf_key": 0.776,
+        "logreg_geom": 0.846,
+        "rf_geom": 0.763,
+        "logreg_l2": 0.656,
+        "logreg_l1": 0.597,
+        "random_forest": 0.778,
+        "extra_trees": 0.74
+      }
+    },
+    "spine_axis": {
+      "roc_auc": 0.83,
+      "pr_auc": 0.308,
+      "f1": 0.429,
+      "precision": 0.281,
+      "recall": 0.9,
+      "balanced_accuracy": 0.821,
+      "positives": 10,
+      "n": 99,
+      "threshold": 0.36,
+      "specificity": 0.742,
+      "ci95": {
+        "roc_auc": [
+          0.732,
+          0.916
+        ],
+        "f1": [
+          0.235,
+          0.607
+        ],
+        "recall": [
+          0.667,
+          1.0
+        ],
+        "specificity": [
+          0.647,
+          0.831
+        ],
+        "balanced_accuracy": [
+          0.704,
+          0.903
+        ]
+      },
+      "model": "logreg_l1",
+      "candidates_auc": {
+        "logreg_key": 0.774,
+        "rf_key": 0.801,
+        "logreg_geom": 0.466,
+        "rf_geom": 0.762,
+        "logreg_l2": 0.693,
+        "logreg_l1": 0.83,
+        "random_forest": 0.736,
+        "extra_trees": 0.696
+      }
+    },
+    "spine_artifact": {
+      "roc_auc": 0.841,
+      "pr_auc": 0.567,
+      "f1": 0.688,
+      "precision": 0.733,
+      "recall": 0.647,
+      "balanced_accuracy": 0.799,
+      "positives": 17,
+      "n": 99,
+      "threshold": 0.364,
+      "specificity": 0.951,
+      "ci95": {
+        "roc_auc": [
+          0.705,
+          0.961
+        ],
+        "f1": [
+          0.462,
+          0.846
+        ],
+        "recall": [
+          0.409,
+          0.882
+        ],
+        "specificity": [
+          0.899,
+          0.988
+        ],
+        "balanced_accuracy": [
+          0.676,
+          0.917
+        ]
+      },
+      "model": "extra_trees",
+      "candidates_auc": {
+        "logreg_key": 0.839,
+        "rf_key": 0.796,
+        "logreg_geom": 0.768,
+        "rf_geom": 0.837,
+        "logreg_l2": 0.729,
+        "logreg_l1": 0.795,
+        "random_forest": 0.84,
+        "extra_trees": 0.841
+      }
+    },
+    "spine_total": {
+      "roc_auc": 0.785,
+      "pr_auc": 0.603,
+      "f1": 0.643,
+      "precision": 0.519,
+      "recall": 0.844,
+      "balanced_accuracy": 0.735,
+      "positives": 32,
+      "n": 99,
+      "threshold": 0.339,
+      "specificity": 0.627,
+      "ci95": {
+        "roc_auc": [
+          0.679,
+          0.88
+        ],
+        "f1": [
+          0.507,
+          0.752
+        ],
+        "recall": [
+          0.706,
+          0.964
+        ],
+        "specificity": [
+          0.508,
+          0.746
+        ],
+        "balanced_accuracy": [
+          0.651,
+          0.818
+        ]
+      },
+      "model": "rf_key",
+      "candidates_auc": {
+        "logreg_key": 0.769,
+        "rf_key": 0.785,
+        "logreg_geom": 0.636,
+        "rf_geom": 0.695,
+        "logreg_l2": 0.663,
+        "logreg_l1": 0.681,
+        "random_forest": 0.705,
+        "extra_trees": 0.712
+      }
+    },
+    "hip_rotation": {
+      "roc_auc": 0.67,
+      "pr_auc": 0.363,
+      "f1": 0.494,
+      "precision": 0.463,
+      "recall": 0.528,
+      "balanced_accuracy": 0.667,
+      "positives": 36,
+      "n": 150,
+      "threshold": 0.31,
+      "specificity": 0.807,
+      "ci95": {
+        "roc_auc": [
+          0.558,
+          0.771
+        ],
+        "f1": [
+          0.333,
+          0.626
+        ],
+        "recall": [
+          0.355,
+          0.686
+        ],
+        "specificity": [
+          0.709,
+          0.889
+        ],
+        "balanced_accuracy": [
+          0.577,
+          0.758
+        ]
+      },
+      "model": "random_forest",
+      "candidates_auc": {
+        "logreg_key": 0.654,
+        "rf_key": 0.635,
+        "logreg_geom": 0.617,
+        "rf_geom": 0.664,
+        "logreg_l2": 0.522,
+        "logreg_l1": 0.435,
+        "random_forest": 0.67,
+        "extra_trees": 0.648
+      }
+    },
+    "hip_roi": {
+      "roc_auc": 0.834,
+      "pr_auc": 0.441,
+      "f1": 0.462,
+      "precision": 0.5,
+      "recall": 0.429,
+      "balanced_accuracy": 0.704,
+      "positives": 7,
+      "n": 150,
+      "threshold": 0.699,
+      "specificity": 0.979,
+      "ci95": {
+        "roc_auc": [
+          0.629,
+          0.97
+        ],
+        "f1": [
+          0.0,
+          0.8
+        ],
+        "recall": [
+          0.0,
+          0.857
+        ],
+        "specificity": [
+          0.944,
+          1.0
+        ],
+        "balanced_accuracy": [
+          0.485,
+          0.914
+        ]
+      },
+      "model": "logreg_l1",
+      "candidates_auc": {
+        "logreg_key": 0.824,
+        "rf_key": 0.755,
+        "logreg_geom": 0.678,
+        "rf_geom": 0.696,
+        "logreg_l2": 0.739,
+        "logreg_l1": 0.834,
+        "random_forest": 0.763,
+        "extra_trees": 0.722
+      }
+    },
+    "hip_total": {
+      "roc_auc": 0.71,
+      "pr_auc": 0.4,
+      "f1": 0.54,
+      "precision": 0.4,
+      "recall": 0.829,
+      "balanced_accuracy": 0.681,
+      "positives": 41,
+      "n": 150,
+      "threshold": 0.239,
+      "specificity": 0.532,
+      "ci95": {
+        "roc_auc": [
+          0.608,
+          0.798
+        ],
+        "f1": [
+          0.414,
+          0.648
+        ],
+        "recall": [
+          0.714,
+          0.933
+        ],
+        "specificity": [
+          0.419,
+          0.643
+        ],
+        "balanced_accuracy": [
+          0.597,
+          0.757
+        ]
+      },
+      "model": "random_forest",
+      "candidates_auc": {
+        "logreg_key": 0.626,
+        "rf_key": 0.667,
+        "logreg_geom": 0.661,
+        "rf_geom": 0.676,
+        "logreg_l2": 0.629,
+        "logreg_l1": 0.641,
+        "random_forest": 0.71,
+        "extra_trees": 0.684
+      }
+    }
+  },
+  "threshold_scale": 1.05,
+  "study_level": {
+    "n": 100,
+    "bad_studies": 50,
+    "accuracy": 0.68,
+    "recall_bad": 0.96,
+    "precision_bad": 0.615,
+    "specificity": 0.4,
+    "balanced_accuracy": 0.68,
+    "f1": 0.75,
+    "ci95": {
+      "recall_bad": [
+        0.902,
+        1.0
+      ],
+      "specificity": [
+        0.268,
+        0.54
+      ],
+      "balanced_accuracy": [
+        0.605,
+        0.753
+      ],
+      "f1": [
+        0.667,
+        0.828
+      ]
+    }
+  },
+  "rule_spine_axis_angle_auc": 0.858
+}
